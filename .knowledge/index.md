@@ -16,7 +16,9 @@ Everything else is upstream and **out of scope** here: for SDK internals, read t
 [architecture/fork-delta.md](architecture/fork-delta.md) — it is the reason this repo exists.
 
 This directory is an [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
-(OKF) v0.1 bundle: a tree of markdown concept files. Read it before touching the fork, then jump to source. For
+(OKF) v0.1 bundle: a tree of markdown concept files — each carrying YAML frontmatter (`type`, `title`,
+`timestamp`) — alongside per-section `index.md` navigation pages and a `log.md`, which are not concepts and carry
+no frontmatter. Read it before touching the fork, then jump to source. For
 conventions, commands, and the fork workflow see [../CLAUDE.md](../CLAUDE.md).
 
 > **Point-in-time knowledge.** Each concept reflects what was true when written (see its `timestamp`). Verify
