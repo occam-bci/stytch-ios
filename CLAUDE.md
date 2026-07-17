@@ -74,8 +74,9 @@ our fork delta**, not the whole SDK.
 
 - **Read it first** when working the fork — start at [`.knowledge/index.md`](.knowledge/index.md), then
   [`.knowledge/architecture/fork-delta.md`](.knowledge/architecture/fork-delta.md).
-- **Keep it fresh** — when the delta or a consumer fact changes, update the relevant concept and append a dated
-  entry to [`.knowledge/log.md`](.knowledge/log.md).
+- **Keep it fresh** — for any substantial PR or tricky bug, adding or adjusting the relevant `.knowledge/`
+  concept is **expected, not optional** (plus a dated entry in [`.knowledge/log.md`](.knowledge/log.md)).
+  Whenever the delta or a consumer fact changes, update the concept it belongs to.
 - **Point-in-time** — concepts carry a `timestamp`; verify `file:line` and the delta against current source.
 - **vs `MEMORY.md`** — `MEMORY.md` holds quick durable notes; `.knowledge/` is the structured catalog.
 

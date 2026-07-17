@@ -28,7 +28,7 @@ git log --oneline upstream/main..origin/fix/encryption_key_rotation_on_relaunch
 - `origin/main` is a (slightly stale) mirror of `upstream/main` with **zero** first-party commits ahead
   (`git rev-list --count upstream/main..origin/main == 0`).
 - The consumer-pinned branch **`fix/encryption_key_rotation_on_relaunch`** = `origin/main` + a merge of newer
-  upstream (bringing in upstream PRs #599/#600, i.e. version 0.104.0) + the single commit `ab363ff`.
+  upstream (bringing in upstream PRs #599/#600) + the single commit `ab363ff`.
 - `2235d4e` is just an upstream-sync merge; `ab363ff` is the real change. Everything else is upstream.
 
 > If a future reader finds more than this one commit ahead of upstream, the fork has grown — re-derive the delta
