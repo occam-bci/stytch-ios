@@ -18,7 +18,7 @@ because the in-memory key no longer matches what is in the keychain.
 `KeychainClientImplementation.shared` (a singleton) eagerly called `loadEncryptionKey()` from its `private init()`,
 and `getEncryptionKey()` **creates** the key if absent. That creation could happen **before**
 `StytchClient.configure(...)` ran `resetKeychainOnFreshInstall()`, which deletes all keychain items on a fresh
-install ([`StytchClientCommon.swift:103-113`](../../Sources/StytchCore/StytchClientCommon.swift)). The reset then
+install ([`Sources/StytchCore/StytchClientCommon.swift`](../../Sources/StytchCore/StytchClientCommon.swift), `resetKeychainOnFreshInstall`). The reset then
 wiped the just-created key while an in-memory copy lingered → memory/keychain divergence on relaunch.
 
 # Fix
@@ -36,4 +36,4 @@ created **after** the fresh-install reset. Consumers get it by pinning `fix/encr
 # Citations
 
 [1] [`Sources/StytchCore/KeychainClient/KeychainClientImplementation.swift`](../../Sources/StytchCore/KeychainClient/KeychainClientImplementation.swift).
-[2] [`Sources/StytchCore/StytchClientCommon.swift:103-113`](../../Sources/StytchCore/StytchClientCommon.swift) — `resetKeychainOnFreshInstall()`.
+[2] [`Sources/StytchCore/StytchClientCommon.swift`](../../Sources/StytchCore/StytchClientCommon.swift) (`resetKeychainOnFreshInstall`).

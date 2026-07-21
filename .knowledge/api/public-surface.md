@@ -4,15 +4,13 @@ title: Public surface — StytchCore & StytchUI
 description: The two SPM products the fork ships, their client entry points, and the Sourcery-generated concurrency variants. Mostly upstream.
 resource: https://stytchauth.github.io/stytch-ios/main/StytchCore/documentation/stytchcore/
 tags: [api, spm, stytchcore, stytchui, public-surface, upstream]
-timestamp: 2026-07-17T00:00:00Z
+timestamp: 2026-07-21T00:00:00Z
 ---
 
-Two SPM products, declared in [`Package.swift`](../../Package.swift):
-
-| Product | Import | Purpose | Atlas usage |
-|---|---|---|---|
-| `StytchCore` | `import StytchCore` | Headless auth API (client-managed flows) | atlas-ios **and** atlas-lab-ios |
-| `StytchUI` | `import StytchUI` | Prebuilt, configurable auth UI on top of `StytchCore` | atlas-lab-ios only |
+The fork ships two SPM products, declared in [`Package.swift`](../../Package.swift): **`StytchCore`**, the
+headless auth API for client-managed flows (imported by both atlas-ios and atlas-lab-ios), and **`StytchUI`**,
+a prebuilt, configurable auth UI layered on top of `StytchCore` (imported by atlas-lab-ios only). For the
+current product/target declarations, read `Package.swift` in the source.
 
 # Entry points
 

@@ -22,8 +22,13 @@ no frontmatter. Read it before touching the fork, then jump to source. For
 conventions, commands, and the fork workflow see [../CLAUDE.md](../CLAUDE.md).
 
 > **Point-in-time knowledge.** Each concept reflects what was true when written (see its `timestamp`). Verify
-> `file:line` citations and the fork delta against current source (`git log upstream/main..origin/HEAD`) before
+> citations and the fork delta against current source (`git log upstream/main..origin/HEAD`) before
 > acting; when a note conflicts with the code, trust the code and update the note.
+
+> **Abstraction level.** Concepts stay at the what / why / where-to-look level: behavioural invariants,
+> rationale, and pointers into the source. Signatures, parameter tables, default values, and line numbers
+> belong in the source, not here — cite `file` + symbol name, never line ranges. This keeps the catalog cheap
+> to maintain: it needs updating when behaviour changes, not on every edit.
 
 # Architecture
 

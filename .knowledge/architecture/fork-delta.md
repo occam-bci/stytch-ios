@@ -50,7 +50,7 @@ One file: [`Sources/StytchCore/KeychainClient/KeychainClientImplementation.swift
 keychain if none exists. iOS keychain items **survive app deletion/reinstall**, so the SDK purges leftovers on a
 fresh install: `StytchClient.configure(...)` → `resetKeychainOnFreshInstall()`, which deletes all keychain items
 when the `stytch_install_id_defaults_key` UserDefaults marker is absent
-([`StytchClientCommon.swift:103-113`](../../Sources/StytchCore/StytchClientCommon.swift)).
+([`Sources/StytchCore/StytchClientCommon.swift`](../../Sources/StytchCore/StytchClientCommon.swift), `resetKeychainOnFreshInstall`).
 
 The bug: eagerly loading the key in the singleton's `init` could **create the encryption key before**
 `resetKeychainOnFreshInstall()` ran during `configure()`. The reset then wiped the just-created key while an
@@ -66,6 +66,6 @@ guarantees the key is created **after** the fresh-install reset, keeping memory 
 
 # Citations
 
-[1] [`Sources/StytchCore/KeychainClient/KeychainClientImplementation.swift`](../../Sources/StytchCore/KeychainClient/KeychainClientImplementation.swift) (encryptionKey ~L14, init ~L25, loadEncryptionKey ~L34, getEncryptionKey ~L48).
-[2] [`Sources/StytchCore/StytchClientCommon.swift:103-113`](../../Sources/StytchCore/StytchClientCommon.swift) — `resetKeychainOnFreshInstall()`; `configure()` order at L40-60.
+[1] [`Sources/StytchCore/KeychainClient/KeychainClientImplementation.swift`](../../Sources/StytchCore/KeychainClient/KeychainClientImplementation.swift) (`encryptionKey`, `init`, `loadEncryptionKey`, `getEncryptionKey`).
+[2] [`Sources/StytchCore/StytchClientCommon.swift`](../../Sources/StytchCore/StytchClientCommon.swift) (`resetKeychainOnFreshInstall`, `configure`).
 [3] Commit [ab363ff](https://github.com/occam-bci/stytch-ios/commit/ab363ffb48a690083bbad077769f9fd59aef80c8) (branch `fix/encryption_key_rotation_on_relaunch`).
