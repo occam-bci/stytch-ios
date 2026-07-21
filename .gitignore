@@ -10,6 +10,8 @@
 ## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
 build/
 DerivedData/
+# keep the OKF knowledge catalog's build/ concept dir (not an Xcode build output)
+!.knowledge/build/
 
 # Swift Package Manager
 #
