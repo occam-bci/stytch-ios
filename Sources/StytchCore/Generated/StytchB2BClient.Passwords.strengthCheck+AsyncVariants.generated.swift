@@ -1,7 +1,10 @@
-#if !os(Android)
 // Generated using Sourcery 2.0.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 import Foundation
 
 public extension StytchB2BClient.Passwords {
@@ -50,4 +53,3 @@ public extension StytchB2BClient.Passwords {
         .eraseToAnyPublisher()
     }
 }
-#endif

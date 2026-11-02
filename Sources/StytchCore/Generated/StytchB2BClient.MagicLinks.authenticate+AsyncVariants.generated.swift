@@ -1,8 +1,14 @@
-#if !os(Android)
 // Generated using Sourcery 2.0.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public extension StytchB2BClient.MagicLinks {
     /// Wraps the magic link [authenticate](https://stytch.com/docs/b2b/api/authenticate-magic-link) API endpoint which validates the magic link token passed in.
@@ -34,4 +40,3 @@ public extension StytchB2BClient.MagicLinks {
         .eraseToAnyPublisher()
     }
 }
-#endif

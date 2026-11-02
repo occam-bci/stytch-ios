@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 @preconcurrency import SwiftyJSON
 
@@ -168,4 +167,3 @@ public extension StytchB2BClient.Organizations.SearchParameters {
         }
     }
 }
-#endif

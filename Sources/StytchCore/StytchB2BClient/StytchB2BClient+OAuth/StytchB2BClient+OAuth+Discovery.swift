@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 
 public extension StytchB2BClient.OAuth {
@@ -55,4 +54,3 @@ public extension StytchB2BClient.OAuth.Discovery {
         }
     }
 }
-#endif

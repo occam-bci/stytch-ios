@@ -1,5 +1,7 @@
-#if !os(Android)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 @preconcurrency import SwiftyJSON
 
 public extension StytchB2BClient {
@@ -271,4 +273,3 @@ public extension StytchB2BClient.MagicLinks.Email {
         }
     }
 }
-#endif

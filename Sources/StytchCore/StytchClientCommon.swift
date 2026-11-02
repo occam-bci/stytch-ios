@@ -1,5 +1,9 @@
 #if canImport(Combine)
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 #else
 import OpenCombineShim
 #endif
@@ -117,6 +121,7 @@ extension StytchClientCommonInternal {
     }
 
     private func runKeychainMigrations() {
+        #if !os(Android)
         Current.keychainClient.migrations().forEach { migration in
             let migrationName = "stytch_keychain_migration_" + String(describing: migration.self)
             guard !Current.defaults.bool(forKey: migrationName) else {
@@ -129,6 +134,7 @@ extension StytchClientCommonInternal {
                 print(error)
             }
         }
+        #endif
     }
 }
 

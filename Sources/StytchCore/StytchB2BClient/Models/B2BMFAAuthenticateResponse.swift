@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 
 /// The concrete response type for B2B MFA `authenticate` calls.
@@ -64,4 +63,3 @@ public protocol DiscoveryIntermediateSessionTokenDataType {
     /// The non optional intermediate session token returned by discovery flows separate from multi factor authentication
     var intermediateSessionToken: String { get }
 }
-#endif

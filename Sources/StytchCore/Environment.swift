@@ -1,7 +1,7 @@
 import Foundation
 #if os(macOS)
 import AppKit
-#else
+#elseif !os(Android)
 import UIKit
 #endif
 
@@ -49,7 +49,9 @@ struct Environment {
 
     var defaults: UserDefaults = .standard
 
+    #if !os(Android)
     var appleOAuthClient: AppleOAuthClient = .live
+    #endif
 
     var networkingClient: NetworkingClient = NetworkingClientImplementation.live
 
@@ -63,7 +65,11 @@ struct Environment {
 
     var localStorage: LocalStorage = .init()
 
+    #if os(Android)
+    var keychainClient: KeychainClient = AndroidKeychainClient.shared
+    #else
     var keychainClient: KeychainClient = KeychainClientImplementation.shared
+    #endif
 
     var userDefaultsClient: EncryptedUserDefaultsClient = EncryptedUserDefaultsClientImplementation.shared
 
@@ -78,7 +84,7 @@ struct Environment {
     let memberStorage: ObjectStorage<MemberStorageWrapper> = .init(objectWrapper: MemberStorageWrapper())
     let organizationStorage: ObjectStorage<OrganizationStorageWrapper> = .init(objectWrapper: OrganizationStorageWrapper())
 
-    #if !os(watchOS)
+    #if !os(watchOS) && !os(Android)
     private var _webAuthenticationSessionClient: Any? = {
         if #available(tvOS 16.0, *) {
             return WebAuthenticationSessionClient.live

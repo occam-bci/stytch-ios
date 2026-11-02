@@ -1,6 +1,9 @@
-#if !os(Android)
+#if canImport(Combine)
 #if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 #else
 import OpenCombineShim
 #endif
@@ -160,4 +163,3 @@ public extension StytchB2BClient.Sessions {
         }
     }
 }
-#endif

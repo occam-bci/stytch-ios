@@ -1,9 +1,16 @@
 #if canImport(Combine)
+#if canImport(Combine)
 import Combine
 #else
 import OpenCombineShim
 #endif
+#else
+import OpenCombineShim
+#endif
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public protocol RouteType {
     var path: Path { get }

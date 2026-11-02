@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 @preconcurrency import SwiftyJSON
 
@@ -245,4 +244,3 @@ public extension StytchB2BClient {
         public let discoveredOrganizations: [StytchB2BClient.DiscoveredOrganization]
     }
 }
-#endif

@@ -1,4 +1,3 @@
-#if !os(Android)
 import AuthenticationServices
 import Foundation
 
@@ -186,5 +185,4 @@ public extension StytchB2BClient.OAuth.ThirdParty.Provider {
     }
 }
 
-#endif
 #endif

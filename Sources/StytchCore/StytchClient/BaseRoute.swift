@@ -1,11 +1,15 @@
 extension StytchClient {
     enum BaseRoute: BaseRouteType {
+        #if !os(Android)
         case biometrics(BiometricsRoute)
+        #endif
         case cryptoWallets(CryptoWalletsRoute)
         case magicLinks(MagicLinksRoute)
         case oauth(OAuthRoute)
         case otps(OTPRoute)
+        #if !os(Android)
         case passkeys(PasskeysRoute)
+        #endif
         case passwords(PasswordsRoute)
         case sessions(SessionsRoute)
         case totp(TOTPRoute)
@@ -13,8 +17,10 @@ extension StytchClient {
 
         var path: Path {
             switch self {
+        #if !os(Android)
             case let .biometrics(route):
                 return "biometrics".appendingPath(route.path)
+        #endif
             case let .cryptoWallets(route):
                 return "crypto_wallets".appendingPath(route.path)
             case let .magicLinks(route):
@@ -23,8 +29,10 @@ extension StytchClient {
                 return "oauth".appendingPath(route.path)
             case let .otps(route):
                 return "otps".appendingPath(route.path)
+        #if !os(Android)
             case let .passkeys(route):
                 return "webauthn".appendingPath(route.path)
+        #endif
             case let .passwords(route):
                 return "passwords".appendingPath(route.path)
             case let .sessions(route):

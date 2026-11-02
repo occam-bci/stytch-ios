@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 
 public extension StytchB2BClient {
@@ -72,4 +71,3 @@ public extension StytchB2BClient {
         }
     }
 }
-#endif

@@ -1,7 +1,10 @@
-#if !os(Android)
 // Generated using Sourcery 2.0.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 import Foundation
 
 #if !os(watchOS)
@@ -35,5 +38,4 @@ public extension StytchB2BClient.SSO {
         .eraseToAnyPublisher()
     }
 }
-#endif
 #endif

@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 
 public extension StytchB2BClient.SCIM {
@@ -147,4 +146,3 @@ public extension StytchB2BClient.SCIM {
         public let connection: SCIMConnection
     }
 }
-#endif

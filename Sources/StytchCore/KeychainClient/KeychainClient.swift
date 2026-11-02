@@ -1,5 +1,9 @@
 #if canImport(CryptoKit)
+#if canImport(CryptoKit)
 import CryptoKit
+#else
+import Crypto
+#endif
 #else
 import Crypto
 #endif
@@ -62,5 +66,9 @@ public enum KeychainError: Swift.Error, Equatable {
     case resultNotArray
     case resultNotData
     case unableToCreateAccessControl
+    #if os(Android)
+    case unhandledError(status: Int32)
+    #else
     case unhandledError(status: OSStatus)
+    #endif
 }

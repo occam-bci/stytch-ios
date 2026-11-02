@@ -4,6 +4,7 @@ struct KeychainItem {
     var kind: Kind
     var name: String
 
+    #if !os(Android)
     var baseQuery: [CFString: Any] {
         [
             kSecClass: kSecClassGenericPassword,
@@ -54,7 +55,8 @@ struct KeychainItem {
         }
 
         return querySegment
-    }
+    }    #endif
+
 }
 
 extension KeychainItem {
@@ -84,6 +86,7 @@ extension KeychainItem {
         case deviceOwnerAuthenticationWithBiometricsOrWatch
         #endif
 
+        #if !os(Android)
         var accessControl: SecAccessControl {
             get throws {
                 var error: Unmanaged<CFError>?
@@ -112,6 +115,7 @@ extension KeychainItem {
                 }
             }
         }
+        #endif
     }
 }
 

@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 
 #if !os(watchOS)
@@ -156,5 +155,4 @@ public extension StytchB2BClient.SSO.SAML {
         public let certificateId: String
     }
 }
-#endif
 #endif

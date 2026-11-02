@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 
 public extension StytchB2BClient.OTP.Email {
@@ -67,4 +66,3 @@ public extension StytchB2BClient.OTP.Email.Discovery {
         }
     }
 }
-#endif

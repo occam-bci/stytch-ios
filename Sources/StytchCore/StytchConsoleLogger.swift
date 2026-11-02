@@ -1,3 +1,13 @@
+#if os(Android)
+import Foundation
+
+// Android: no os.log or Objective-C runtime; messages go to stdout (logcat via Skip).
+public final class StytchConsoleLogger {
+    public static func log(message: String) { print("[stytch] \(message)") }
+    public static func warn(message: String) { print("[stytch] warning: \(message)") }
+    public static func error(message: String) { print("[stytch] error: \(message)") }
+}
+#else
 import Foundation
 import os.log
 
@@ -45,3 +55,4 @@ public extension StytchConsoleLogger {
         logger.log(level: type, "\(message, privacy: .public)")
     }
 }
+#endif

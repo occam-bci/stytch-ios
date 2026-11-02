@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 @preconcurrency import SwiftyJSON
 
@@ -43,4 +42,3 @@ extension MemberSession: Equatable {
             lhs.roles == rhs.roles
     }
 }
-#endif

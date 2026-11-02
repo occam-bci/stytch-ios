@@ -1,4 +1,3 @@
-#if !os(Android)
 import Foundation
 @preconcurrency import SwiftyJSON
 
@@ -43,4 +42,3 @@ public extension StytchB2BClient.Organizations.Members {
         }
     }
 }
-#endif

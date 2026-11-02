@@ -1,4 +1,3 @@
-#if !os(Android)
 // swiftlint:disable file_length
 import Foundation
 
@@ -454,4 +453,3 @@ extension StytchB2BClient {
         }
     }
 }
-#endif
