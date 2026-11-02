@@ -1,4 +1,9 @@
+#if !os(Android)
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 
 public extension StytchB2BClient {
     /// The interface for interacting with sessions products.
@@ -155,3 +160,4 @@ public extension StytchB2BClient.Sessions {
         }
     }
 }
+#endif

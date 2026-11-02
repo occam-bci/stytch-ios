@@ -19,6 +19,8 @@ let package = Package(
         .package(url: "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk", from: "18.8.1"),
         .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", from: "5.0.2"),
         .package(url: "https://github.com/stytchauth/stytch-ios-dfp.git", from: "1.0.5"),
+        .package(url: "https://github.com/OpenCombine/OpenCombine.git", from: "0.14.0"),
+        .package(url: "https://github.com/apple/swift-crypto.git", from: "3.0.0"),
     ],
     targets: [
         .target(
@@ -37,6 +39,8 @@ let package = Package(
                 .product(name: "RecaptchaEnterprise", package: "recaptcha-enterprise-mobile-sdk", condition: .when(platforms: [.iOS])),
                 .product(name: "StytchDFP", package: "stytch-ios-dfp", condition: .when(platforms: [.iOS])),
                 .product(name: "SwiftyJSON", package: "SwiftyJSON"),
+                .product(name: "OpenCombineShim", package: "OpenCombine", condition: .when(platforms: [.android])),
+                .product(name: "Crypto", package: "swift-crypto", condition: .when(platforms: [.android])),
             ],
             resources: [
                 .process("PrivacyInfo.xcprivacy"),

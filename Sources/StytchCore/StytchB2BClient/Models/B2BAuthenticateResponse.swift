@@ -1,3 +1,4 @@
+#if !os(Android)
 import Foundation
 
 /// The concrete response type for B2B `authenticate` calls.
@@ -37,3 +38,4 @@ public protocol B2BAuthenticateResponseDataType {
     /// If Protected Auth is enabled and returned fingerprinting results, the memberDevice response field will contain information about the member's device attributes.
     var memberDevice: DeviceHistory? { get }
 }
+#endif

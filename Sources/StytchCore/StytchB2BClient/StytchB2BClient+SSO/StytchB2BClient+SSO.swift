@@ -1,3 +1,4 @@
+#if !os(Android)
 import AuthenticationServices
 import Foundation
 
@@ -200,4 +201,5 @@ public extension StytchB2BClient.SSO {
         public let connectionId: String
     }
 }
+#endif
 #endif

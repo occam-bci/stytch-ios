@@ -1,4 +1,9 @@
+#if !os(Android)
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 
 public extension StytchB2BClient {
     /// The interface for interacting with organizations products.
@@ -108,3 +113,4 @@ public extension StytchB2BClient.Organizations {
         public let nextCursor: String?
     }
 }
+#endif

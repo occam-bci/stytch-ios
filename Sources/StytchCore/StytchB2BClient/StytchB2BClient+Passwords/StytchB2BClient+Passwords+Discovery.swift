@@ -1,3 +1,4 @@
+#if !os(Android)
 import Foundation
 
 public extension StytchB2BClient.Passwords {
@@ -160,3 +161,4 @@ public extension StytchB2BClient.Passwords.Discovery {
 }
 
 public extension StytchB2BClient.Passwords.Discovery {}
+#endif

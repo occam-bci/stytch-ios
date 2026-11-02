@@ -1,3 +1,4 @@
+#if !os(Android)
 import Foundation
 
 #if !os(watchOS)
@@ -100,4 +101,5 @@ public extension StytchB2BClient.SSO.OIDC {
         public let connection: OIDCConnection
     }
 }
+#endif
 #endif

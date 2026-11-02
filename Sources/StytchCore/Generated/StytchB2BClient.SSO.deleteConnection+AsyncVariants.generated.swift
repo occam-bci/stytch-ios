@@ -1,3 +1,4 @@
+#if !os(Android)
 // Generated using Sourcery 2.0.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 import Combine
@@ -30,4 +31,5 @@ public extension StytchB2BClient.SSO {
         .eraseToAnyPublisher()
     }
 }
+#endif
 #endif

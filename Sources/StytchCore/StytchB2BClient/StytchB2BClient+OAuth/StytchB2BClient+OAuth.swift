@@ -1,3 +1,4 @@
+#if !os(Android)
 import Foundation
 
 public protocol B2BOAuthProviderProtocol {
@@ -147,4 +148,5 @@ public extension StytchB2BClient.OAuth {
         .init(provider: .github)
     }
 }
+#endif
 #endif

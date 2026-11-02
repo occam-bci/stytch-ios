@@ -1,3 +1,4 @@
+#if !os(Android)
 import Foundation
 
 public extension StytchB2BClient.Organizations {
@@ -80,3 +81,4 @@ public extension StytchB2BClient.Organizations.Members {
         public let memberId: String
     }
 }
+#endif

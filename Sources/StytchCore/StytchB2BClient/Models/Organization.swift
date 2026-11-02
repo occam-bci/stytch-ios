@@ -1,3 +1,4 @@
+#if !os(Android)
 import Foundation
 @preconcurrency import SwiftyJSON
 
@@ -166,3 +167,4 @@ public extension Organization {
         }
     }
 }
+#endif

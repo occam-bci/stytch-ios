@@ -1,3 +1,4 @@
+#if !os(Android)
 import Foundation
 @preconcurrency import SwiftyJSON
 
@@ -27,3 +28,4 @@ public protocol OrganizationType: Codable, Sendable {
     /// The image URL of the Organization logo.
     var logoUrl: URL? { get }
 }
+#endif

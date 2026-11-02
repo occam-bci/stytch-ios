@@ -1,4 +1,8 @@
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 
 public extension StytchClient {
     /// The interface for interacting with sessions products.
