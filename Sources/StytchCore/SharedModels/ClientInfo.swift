@@ -19,7 +19,13 @@ public struct ClientInfo: Encodable {
 
 public extension ClientInfo {
     struct App: Encodable {
+        #if os(Android)
+        // corelibs has no bundle id on Android; the process name is the package name.
+        let identifier: String = (try? String(contentsOfFile: "/proc/self/cmdline", encoding: .utf8))?
+            .split(separator: "\0").first.map(String.init) ?? "unknown_bundle_id"
+        #else
         let identifier: String = Bundle.main.bundleIdentifier ?? "unknown_bundle_id"
+        #endif
     }
 
     struct SDK: Encodable {
