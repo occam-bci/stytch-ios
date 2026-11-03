@@ -1,4 +1,8 @@
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 
 public extension StytchB2BClient {
     /// The interface for interacting with organizations products.

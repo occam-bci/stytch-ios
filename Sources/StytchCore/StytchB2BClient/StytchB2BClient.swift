@@ -1,4 +1,8 @@
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 import Foundation
 #if os(iOS)
 import UIKit
@@ -62,7 +66,7 @@ public extension StytchB2BClient {
         case discovery
         case multiTenantMagicLinks = "multi_tenant_magic_links"
         case multiTenantPasswords = "multi_tenant_passwords"
-        #if !os(watchOS)
+        #if !os(watchOS) && !os(Android)
         case sso
         case oauth
         case discoveryOauth = "discovery_oauth"
@@ -88,7 +92,7 @@ public extension StytchB2BClient {
         case mfauth(B2BMFAAuthenticateResponse)
         case mfaOAuth(StytchB2BClient.OAuth.OAuthAuthenticateResponse)
         case discovery(StytchB2BClient.DiscoveryAuthenticateResponse)
-        #if !os(watchOS)
+        #if !os(watchOS) && !os(Android)
         case discoveryOauth(StytchB2BClient.DiscoveryAuthenticateResponse)
         #endif
     }
@@ -138,7 +142,7 @@ public extension StytchB2BClient {
                 try? await EventsClient.logEvent(parameters: .init(eventName: "deeplink_handled_success", details: ["token_type": tokenType.rawValue]))
             }
             return .manualHandlingRequired(.multiTenantPasswords, redirectType, token: token)
-        #if !os(watchOS)
+        #if !os(watchOS) && !os(Android)
         case .sso:
             Task {
                 try? await EventsClient.logEvent(parameters: .init(eventName: "deeplink_handled_success", details: ["token_type": tokenType.rawValue]))

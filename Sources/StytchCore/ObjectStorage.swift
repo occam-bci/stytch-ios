@@ -1,4 +1,8 @@
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 import Foundation
 
 // swiftlint:disable type_contents_order let_var_whitespace

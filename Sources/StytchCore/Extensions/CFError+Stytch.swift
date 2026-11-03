@@ -1,3 +1,4 @@
+#if !os(Android)
 // swiftlint:disable:this file_name
 
 import CoreFoundation
@@ -13,3 +14,4 @@ extension Unmanaged where Instance == CFError {
         takeRetainedValue() as Error
     }
 }
+#endif

@@ -120,7 +120,7 @@ public extension StytchB2BClient.OAuth {
     }
 }
 
-#if !os(watchOS)
+#if !os(watchOS) && !os(Android)
 public extension StytchB2BClient.OAuth {
     /// The interface for authenticating a user with Google.
     var google: ThirdParty {

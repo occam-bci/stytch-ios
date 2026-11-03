@@ -54,12 +54,14 @@ public extension StytchClient {
     static var oauth: OAuth { .init(router: router.scopedRouter { $0.oauth }, userRouter: router.scopedRouter { $0.users }) }
 }
 
+#if !os(Android)
 public extension StytchClient.OAuth {
     /// The interface for authenticating a user with Apple.
     var apple: Apple { .init(router: router.scopedRouter { $0.apple }, userRouter: userRouter) }
 }
+#endif
 
-#if !os(watchOS)
+#if !os(watchOS) && !os(Android)
 public extension StytchClient.OAuth {
     /// The interface for authenticating a user with Amazon.
     var amazon: ThirdParty { .init(provider: .amazon) }

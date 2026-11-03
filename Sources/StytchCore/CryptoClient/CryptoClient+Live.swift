@@ -1,4 +1,8 @@
+#if canImport(CryptoKit)
 import CryptoKit
+#else
+import Crypto
+#endif
 import Foundation
 
 extension CryptoClient {
@@ -7,9 +11,15 @@ extension CryptoClient {
     } dataWithRandomBytesOfCount: { byteCount in
         var buffer = [UInt8](repeating: 0, count: Int(byteCount))
 
+        #if os(Android)
+        // SystemRandomNumberGenerator is the kernel CSPRNG (getrandom) on Android.
+        var generator = SystemRandomNumberGenerator()
+        for index in buffer.indices { buffer[index] = generator.next() }
+        #else
         guard SecRandomCopyBytes(kSecRandomDefault, buffer.count, &buffer) == errSecSuccess else {
             throw StytchSDKError.randomNumberGenerationFailed
         }
+        #endif
 
         return .init(buffer)
     } generateKeyPair: {

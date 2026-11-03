@@ -1,3 +1,12 @@
+#if os(Android)
+// No NWPathMonitor on Android; always online so startup is not deferred.
+class NetworkMonitor {
+    var isConnected: Bool? = true
+    init() {}
+    func startMonitoring() {}
+    func stopMonitoring() {}
+}
+#else
 import Network
 
 class NetworkMonitor {
@@ -48,3 +57,4 @@ class NetworkMonitor {
         }
     }
 }
+#endif

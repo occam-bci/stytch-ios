@@ -3,7 +3,7 @@ import Foundation
 import AppKit
 #elseif os(watchOS)
 import WatchKit
-#else
+#elseif !os(Android)
 import UIKit
 #endif
 
@@ -19,7 +19,13 @@ public struct ClientInfo: Encodable {
 
 public extension ClientInfo {
     struct App: Encodable {
+        #if os(Android)
+        // corelibs has no bundle id on Android; the process name is the package name.
+        let identifier: String = (try? String(contentsOfFile: "/proc/self/cmdline", encoding: .utf8))?
+            .split(separator: "\0").first.map(String.init) ?? "unknown_bundle_id"
+        #else
         let identifier: String = Bundle.main.bundleIdentifier ?? "unknown_bundle_id"
+        #endif
     }
 
     struct SDK: Encodable {
@@ -42,6 +48,8 @@ public extension ClientInfo {
             return "macOS"
             #elseif os(watchOS)
             WKInterfaceDevice.current().systemName
+            #elseif os(Android)
+            return "Android"
             #else
             return UIDevice.current.systemName
             #endif
@@ -65,6 +73,8 @@ public extension ClientInfo {
             "macOS"
             #elseif os(watchOS)
             WKInterfaceDevice.current().model
+            #elseif os(Android)
+            "android"
             #else
             UIDevice.current.model.lowercased()
             #endif
@@ -75,6 +85,8 @@ public extension ClientInfo {
             NSScreen.main?.frame.size ?? .zero
             #elseif os(watchOS)
             WKInterfaceDevice.current().screenBounds.size
+            #elseif os(Android)
+            CGSize.zero
             #else
             UIScreen.main.bounds.size
             #endif

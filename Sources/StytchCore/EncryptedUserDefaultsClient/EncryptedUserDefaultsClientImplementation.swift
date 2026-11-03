@@ -1,4 +1,8 @@
+#if canImport(CryptoKit)
 import CryptoKit
+#else
+import Crypto
+#endif
 import Foundation
 
 final class EncryptedUserDefaultsClientImplementation: EncryptedUserDefaultsClient {
@@ -11,7 +15,11 @@ final class EncryptedUserDefaultsClientImplementation: EncryptedUserDefaultsClie
         DispatchQueue.getSpecific(key: queueKey) != nil
     }
 
+    #if os(Android)
+    internal let defaults = AndroidFileDefaults(name: "stytch-encrypted-defaults.json")
+    #else
     internal let defaults: UserDefaults = .init(suiteName: "StytchEncryptedUserDefaults") ?? .standard
+    #endif
 
     private init() {
         queue = DispatchQueue(label: "StytchEncryptedUserDefaultsClientQueue")
@@ -96,3 +104,35 @@ final class EncryptedUserDefaultsClientImplementation: EncryptedUserDefaultsClie
         }
     }
 }
+
+#if os(Android)
+// corelibs UserDefaults does not persist on Android; only ever touched from the client's serial queue.
+final class AndroidFileDefaults {
+    private let fileURL: URL
+    private var values: [String: Data]
+
+    init(name: String) {
+        let directory = (try? FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true))
+            ?? URL(fileURLWithPath: NSTemporaryDirectory())
+        fileURL = directory.appendingPathComponent(name)
+        values = (try? Data(contentsOf: fileURL)).flatMap { try? JSONDecoder().decode([String: Data].self, from: $0) } ?? [:]
+    }
+
+    func data(forKey key: String) -> Data? { values[key] }
+
+    func set(_ value: Data?, forKey key: String) {
+        values[key] = value
+        persist()
+    }
+
+    func removeObject(forKey key: String) {
+        values[key] = nil
+        persist()
+    }
+
+    private func persist() {
+        try? JSONEncoder().encode(values).write(to: fileURL, options: .atomic)
+        try? FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: fileURL.path)
+    }
+}
+#endif

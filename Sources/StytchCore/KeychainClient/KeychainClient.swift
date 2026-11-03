@@ -1,4 +1,8 @@
+#if canImport(CryptoKit)
 import CryptoKit
+#else
+import Crypto
+#endif
 import Foundation
 
 protocol KeychainClient: AnyObject {
@@ -58,5 +62,9 @@ public enum KeychainError: Swift.Error, Equatable {
     case resultNotArray
     case resultNotData
     case unableToCreateAccessControl
+    #if os(Android)
+    case unhandledError(status: Int32)
+    #else
     case unhandledError(status: OSStatus)
+    #endif
 }

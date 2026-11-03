@@ -1,4 +1,8 @@
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 import Foundation
 #if os(iOS)
 import UIKit
@@ -101,6 +105,10 @@ extension StytchClientCommonInternal {
     }
 
     private func resetKeychainOnFreshInstall() {
+        #if os(Android)
+        // App data, unlike the iOS keychain, is already wiped on uninstall; .standard defaults do not persist here.
+        return
+        #else
         guard
             case let installIdDefaultsKey = "stytch_install_id_defaults_key",
             Current.defaults.string(forKey: installIdDefaultsKey) == nil
@@ -110,9 +118,11 @@ extension StytchClientCommonInternal {
         KeychainItem.allItems.forEach { item in
             try? Current.keychainClient.removeItem(item: item)
         }
+        #endif
     }
 
     private func runKeychainMigrations() {
+        #if !os(Android)
         Current.keychainClient.migrations().forEach { migration in
             let migrationName = "stytch_keychain_migration_" + String(describing: migration.self)
             guard !Current.defaults.bool(forKey: migrationName) else {
@@ -125,6 +135,7 @@ extension StytchClientCommonInternal {
                 print(error)
             }
         }
+        #endif
     }
 }
 

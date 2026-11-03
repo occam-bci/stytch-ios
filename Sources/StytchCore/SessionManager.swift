@@ -1,5 +1,12 @@
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 enum SessionType {
     case member(MemberSession)
@@ -255,7 +262,7 @@ extension HTTPCookieStorage {
 
 extension SessionManager {
     func processPotentialBiometricRegistrationCleanups(currentUser: User, lastAuthenticatedUserId: String?) {
-        #if !os(tvOS) && !os(watchOS)
+        #if !os(tvOS) && !os(watchOS) && !os(Android)
         guard let previousUserId = lastAuthenticatedUserId else {
             // if we have no previous user, just clean up any local registrations that don't exist on the server
             return StytchClient.biometrics.cleanupPotentiallyOrphanedBiometricRegistrations()

@@ -1,4 +1,8 @@
+#if canImport(Combine)
 import Combine
+#else
+import OpenCombineShim
+#endif
 @preconcurrency import SwiftyJSON
 
 public extension StytchB2BClient {

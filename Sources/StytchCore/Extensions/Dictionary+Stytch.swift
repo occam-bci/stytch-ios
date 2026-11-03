@@ -1,3 +1,4 @@
+#if !os(Android)
 import CoreFoundation
 import Foundation
 
@@ -14,3 +15,4 @@ extension Dictionary where Key == String, Value == String {
         }
     }
 }
+#endif
