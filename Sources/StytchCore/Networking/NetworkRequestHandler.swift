@@ -94,7 +94,12 @@ internal struct NetworkRequestHandlerImplementation: NetworkRequestHandler {
     }
 
     func defaultRequestHandler(request: URLRequest) async throws -> (Data, HTTPURLResponse) {
+        #if os(Android)
+        let transport = StytchClient.dataTransport ?? { try await urlSession.data(for: $0) }
+        let (data, response) = try await transport(request)
+        #else
         let (data, response) = try await urlSession.data(for: request)
+        #endif
         guard let response = response as? HTTPURLResponse else {
             throw StytchAPISchemaError(message: "Request does not match expected schema.")
         }
